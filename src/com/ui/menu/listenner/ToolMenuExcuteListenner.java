@@ -19,12 +19,9 @@ import com.view.sqloperate.Controller;
 import com.view.sqloperate.QuerySqlTab;
 
 public class ToolMenuExcuteListenner extends MenuListenner{
+	
 	@Override
-	public void MouseOnClick(MouseEvent e) {
-		System.out.println("Ö´ÐÐÓï¾ä");
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void mousePressed(MouseEvent e) {
 		Thread th = new Thread(){
 			public void run() {
 		

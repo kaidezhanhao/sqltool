@@ -32,6 +32,7 @@ import javax.swing.text.JTextComponent;
 
 import main.SQLTool;
 
+import com.alibaba.druid.sql.SQLUtils;
 import com.dao.Dao;
 import com.dao.entity.Column;
 import com.dao.entity.Table;
@@ -291,52 +292,30 @@ public class Intellisense extends JWindow{
 	}
 //	\\s+(\\w+)\\s+|
 	public String getRefTableName(String sql,String refTable){
+		return com.util.SQLUtils.getTableName(refTable, sql);
 //		Pattern pat = Pattern.compile("\\s+(\\(.+\\))\\s+"+refTable+"\\s*|\\W+(\\w+)\\s+"+refTable+"[\\W;\\)\\(]+",Pattern.CASE_INSENSITIVE);
-		String tableNamesRegEx1 =  "(from)([\\s*\\w*,)]*)(?:where|left|start|on)";
-	    Pattern pattern = Pattern.compile(tableNamesRegEx1,Pattern.CASE_INSENSITIVE);
-	    String[] split = sql.split("\\s+"+refTable+"\\s+");
-	    if(split.length>1) {
-	    	String[] split2 = split[split.length-2].split("\\s+");
-	    	if(split2.length>0) {
-	    		return split2[split2.length-1];
-	    	}
-	    	return "";
-	    }
-//	    Matcher matcher = pattern.matcher(vo.getSql());
-//	    String tempTableName,tempStr;
-//	    List<Map<String, Object>> columns =  new ArrayList<>();
-//	    Set setTableNames =  new HashSet<>();
-//	    Set setCloumnNames =  new HashSet<>();
-//	    Map<String, String> queryColumnsForSql = queryColumnsForSql(vo.getSql());
-//
-//	    while(matcher.find()){
-//	    	tempStr = matcher.group(2);
-//	    	String[] split = tempStr.trim().split("[,\\s]");
-//	    	for (int i = 0; i < split.length; i++) {
-//	    		String str =  split[i].trim().replaceAll("\\s+\\w+", "");
-//	    		if(setTableNames.add(str)) {
-//	    			List<Map<String, Object>> queryColumns = queryColumns(str);
-//	    			for (int j = 0; j < queryColumns.size(); j++) {
-//	    				if(setCloumnNames.add(queryColumns.get(j).get("COLUMNNAME"))){
-//	    					String columsAlias = columsAliasMap.get(queryColumns.get(j).get("COLUMNNAME"));
-//	    					if(queryColumns.get(j).get("COLUMNNAME").equals("NOTITY_FINISH_TIME")) {
-//	    						queryColumns.get(j).get("COLUMNNAME");
-//	    					}
-//	    					if(columsAlias!=null) {
-//	    						if(queryColumnsForSql.containsKey(columsAlias)) {
-//	    							Map<String, Object> map2 = queryColumns.get(j);
-//	    							map2.put(columsAlias, queryColumns.get(j));
-//	    							columns.add(map2);
-//	    						}
-//	    					}else 
-//	    						if(queryColumnsForSql.containsKey(queryColumns.get(j).get("COLUMNNAME"))) 
-//	    							columns.add(queryColumns.get(j));
-//	    				}
-//					}
-//	    		}
-//			}
+//		String tableNamesRegEx1 =  "(from|join)((\\s*\\w*\\s*,\\s*)|(\\s*\\w*\\s*\\w*\\s*,)|(\\s*\\w*\\s*)|(\\s*\\w*\\s*\\w*\\s*))(?:where|left|start|on|$|;)?";
+//		String tableNamesRegEx1 =  "(?:from)([\\s\\S]*)(?:where|start|on|left;)";
+//		String tableNamesRegEx1 =  "\\s+from\\s+(\\w+)(?:as|\\s+)(\\w*)\\s+(?:where|left|join|inner)";
+//	    Pattern pattern = Pattern.compile(tableNamesRegEx1,Pattern.CASE_INSENSITIVE);
+//	    String[] split = sql.split("\\s+"+refTable+"\\s+");
+//	    if(split.length>1) {
+//	    	String[] split2 = split[split.length-2].split("\\s+");
+//	    	if(split2.length>0) {
+//	    		return split2[split2.length-1];
+//	    	}
+//	    	return "";
 //	    }
-		return "";
+//	    Matcher matcher = pattern.matcher(sql);
+//
+	    
+//	    while(matcher.find()){
+//	    	if(refTable.equals(matcher.group(1))) {
+//	    		
+//	    		return matcher.group(4).trim();
+//	    	}
+//
+//	    }
 	}
 	public static void main(String[] args) {
 		Intellisense in = new Intellisense();

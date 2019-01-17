@@ -39,7 +39,7 @@ public class PopMenuTreeListenner extends MenuListenner implements Refresh,
 	}
 
 	@Override
-	public void MouseOnClick(MouseEvent e) {
+	public void mousePressed(MouseEvent e) {
 		if (((JMenuItem) e.getSource()).getText().equals("Ë¢ÐÂ")) {
 			loadTablesInfo();
 		}

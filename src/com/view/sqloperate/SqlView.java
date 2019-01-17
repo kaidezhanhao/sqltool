@@ -93,24 +93,13 @@ public class SqlView extends HorizontalSplitPane {
 			}
 
 			@Override
-			public void mousePressed(MouseEvent paramMouseEvent) {
-			}
+			public void mousePressed(MouseEvent e) {
 
-			@Override
-			public void mouseExited(MouseEvent paramMouseEvent) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent paramMouseEvent) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
 				Point point = e.getPoint();
-//				TreePath pathForLocation = dataBaseTree.getPathForLocation(
-//						e.getX(), e.getY());
+				TreePath pathForLocation = dataBaseTree.getPathForLocation(
+						e.getX(), e.getY());
 
-//				dataBaseTree.setSelectionPath(pathForLocation);
+				dataBaseTree.setSelectionPath(pathForLocation);
 				if (MouseEvent.BUTTON3 == e.getButton()
 						&& e.getClickCount() == 1) {
 					TreePath selectionPath =dataBaseTree.getPathForLocation(e.getX(), e.getY());
@@ -141,7 +130,20 @@ public class SqlView extends HorizontalSplitPane {
 //					node.getDoAction().doDoubleClick(node);
 
 				}
+			
 			}
+			
+			@Override
+			public void mouseExited(MouseEvent paramMouseEvent) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent paramMouseEvent) {
+				
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {}
 		});
 //		sqlCom.addTreeWillExpandListener(new TreeWillExpandListener() {
 //			int n ;

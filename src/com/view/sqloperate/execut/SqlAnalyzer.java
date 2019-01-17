@@ -46,11 +46,11 @@ public class SqlAnalyzer {
 		return str.startsWith("INSERT")||str.startsWith("UPDATA");
 	}
 	public String getTableName(String sql){
-		Pattern per = Pattern.compile("FROM\\s+(\\w+);*",Pattern.CASE_INSENSITIVE);
+		Pattern per = Pattern.compile("(from|join)(,?(\\s*\\w*\\.)?(\\s*\\w*\\s*)(\\w*))(?:where|left|start|on|$|;)?",Pattern.CASE_INSENSITIVE);
 		Matcher re = per.matcher(sql);
 		while(re.find()){
-			String group = re.group(1);
-			return group;
+			String group = re.group(4);
+			return group.trim();
 		}
 		return "";
 	}

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <keywords><key >all</key>
 <key >alter</key>
-<key >-alter table tablename add(columnname type)</key>
-<key >-select * from user_info where mobile_number='18513213961';  </key>
-<key >-select * from user_info where mobile_number='18513213961';  </key>
-<key >-select * from active_card where active_card.kb_user_id= '167979080317266539'; </key>
-<key >-select * from user_pu where card_id ='560000100030' and status ='01' and now() between start_time and expire_time;</key>
-<key >ALTER table SW_PAYGATE_CHANGE_EMAIL add (UPDATED_ON TIMESTAMP default  sysdate  );</key>
-<key >ALTER table SW_PAYGATE_CHANGE_EMAIL modify  (UPDATED_ON TIMESTAMP default  sysdate  );</key>
-<key >ALTER table SW_PAYGATE_CHANGE_EMAIL drop   UPDATED_ON  );</key>
+<key >alter table tablename add (column datatype [default value][null/not null])</key>
+<key >alter table tablename drop (column)</key>
+<key >alter table tablename modify (column datatype [default value][null/not null])</key>
 <key >and</key>
 <key >any</key>
 <key >as</key>
