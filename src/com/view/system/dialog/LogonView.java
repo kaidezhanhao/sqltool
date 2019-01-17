@@ -289,8 +289,7 @@ public class LogonView extends JDialog implements ICheckUtilParameter{
 		butonP.add(pmd);
 		pmd.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				JButton cancel = new JButton("È¡Ïû");
+			public void mousePressed(MouseEvent e) {
 				if("PDM >>".equals(pmd.getText())){
 					pmd.setText("PDM <<");
 					setSize(300, 340);
@@ -327,7 +326,6 @@ public class LogonView extends JDialog implements ICheckUtilParameter{
 		password.setText(this.loginInfo.getPassword());
 		
 		
-		
 		try {
 			connInfo_old = (LoginInfo) this.loginInfo.clone();
 		} catch (CloneNotSupportedException e) {
@@ -355,8 +353,9 @@ public class LogonView extends JDialog implements ICheckUtilParameter{
 		public LogOnMouse(IconMutableTreeNode treeNode){
 			this.node =treeNode;
 		}
+		
 		@Override
-		public void mouseClicked(MouseEvent event) {
+		public void mousePressed(MouseEvent event) {
 			if(((JButton)event.getSource()).getText().equals("µÇÂ¼")){
 				int ecp = 0;
 				try {
@@ -475,6 +474,7 @@ public class LogonView extends JDialog implements ICheckUtilParameter{
 		// TODO Auto-generated method stub
 		return name.getText();
 	}
+	
 }
 
 

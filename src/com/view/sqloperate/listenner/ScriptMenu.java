@@ -98,11 +98,11 @@ public class ScriptMenu extends MenuListenner{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			String name = ((JMenuItem)e.getSource()).getName();
-			System.out.println("11111111¡£¡£¡£"+name);
 			UITabbedPane tabQuerySql = SQLTool.getSQLTool().getToolFrame().getSqlView().getTabQuerySql();
 			System.out.println(new Date().getTime());
 			LazyImageIcon lazyImageIcon = new LazyImageIcon("/imgs/tab/tabedit.png");
 			tabQuerySql.addTab("aaa",lazyImageIcon.getIcon(),new  QuerySqlTab());
 			System.out.println(new Date().getTime());
 	}
+	
 }

@@ -43,6 +43,9 @@ import javax.swing.undo.UndoManager;
 
 import org.apache.log4j.Logger;
 
+import com.alibaba.druid.sql.SQLUtils;
+import com.alibaba.druid.sql.SQLUtils.FormatOption;
+import com.alibaba.druid.util.JdbcConstants;
 import com.dao.entity.Table;
 import com.dnd.FileToTabDnd;
 import com.entity.LoginInfo;
@@ -185,6 +188,20 @@ public class QuerySqlTab extends VerticalSplitPane implements RunIcon{
 		shiftCtrlF = new TextAction("shift ctrl pressed F") {
 			@Override
 			public void actionPerformed(ActionEvent paramActionEvent) {
+				LoginInfo info = (LoginInfo) ((PromptLabel)connectionList.getSelectedItem()).getUser();
+				String dataType = info.getDataType();
+				String oracleDriver = JdbcConstants.MARIADB_DRIVER;
+				switch (dataType) {
+				case "Oracle":
+					oracleDriver = JdbcConstants.ORACLE_DRIVER;
+					break;
+				case "mysql":
+					oracleDriver = JdbcConstants.MYSQL_DRIVER;
+					break;
+				default:
+					break;
+				}
+//				String format = SQLUtils.format(editSql.getSelectedText(), com.util.SQLUtils.getJdbcConstants());
 				String format = SQLFormatterUtil.getSQLFormatterUtil().format(editSql.getSelectedText());
 //				String format = FormatStyle.BASIC.getFormatter().format();
 //				String format = FormatStyle.NONE.getFormatter().format(editSql.getSelectedText());
@@ -641,7 +658,6 @@ public class QuerySqlTab extends VerticalSplitPane implements RunIcon{
 		parents.setIconAt(index,lazyImageIcon);
 		return isChange = false;
 	}
-
 	
 	
 }

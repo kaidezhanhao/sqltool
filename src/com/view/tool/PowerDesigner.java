@@ -126,7 +126,8 @@ public class PowerDesigner{
 	}
 	
 	public void clear(LoginInfo info) throws DocumentException{
-		tables.clear();
+		tables.remove(info);
 		initData(info);
 	}
+	
 }

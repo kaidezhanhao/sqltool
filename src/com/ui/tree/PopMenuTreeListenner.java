@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
@@ -39,7 +38,7 @@ public class PopMenuTreeListenner extends MenuListenner implements Refresh,
 	}
 
 	@Override
-	public void MouseOnClick(MouseEvent e) {
+	public void mousePressed(MouseEvent e) {
 		if (((JMenuItem) e.getSource()).getText().equals("Ë¢ÐÂ")) {
 			loadTablesInfo();
 		}

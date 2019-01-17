@@ -105,8 +105,7 @@ public class Controller {
 
 	/**
 	 * 
-	 * @param connInfo
-	 *            登录信息
+	 * @param connInfo 登录信息
 	 * @throws InterruptedException
 	 * @throws SQLException
 	 */
@@ -127,6 +126,7 @@ public class Controller {
 			return dbExecutTables.getTables();
 		}
 	}
+
 	public ArrayList<Table> getResSequence(LoginInfo connInfo) throws InterruptedException, SQLException {
 		DBExecutSequence dbExecutTables = new DBExecutSequence(connInfo);
 		threads.execute(dbExecutTables);
@@ -135,10 +135,10 @@ public class Controller {
 			return dbExecutTables.getTables();
 		}
 	}
+
 	/**
 	 * 
-	 * @param connInfo
-	 *            登录信息
+	 * @param connInfo 登录信息
 	 * @return
 	 * @throws InterruptedException
 	 * @throws SQLException
@@ -157,8 +157,7 @@ public class Controller {
 
 	/**
 	 * 
-	 * @param connInfo
-	 *            登录信息
+	 * @param connInfo 登录信息
 	 * @return
 	 * @throws InterruptedException
 	 * @throws SQLException
@@ -178,12 +177,9 @@ public class Controller {
 	/**
 	 * 执行一般查单据询语句
 	 * 
-	 * @param connInfo
-	 *            登录信息
-	 * @param editSqlTab
-	 *            结果集处理类
-	 * @param sql
-	 *            要sql语句
+	 * @param connInfo   登录信息
+	 * @param editSqlTab 结果集处理类
+	 * @param sql        要sql语句
 	 * @throws InterruptedException
 	 * @throws SQLException
 	 */
@@ -200,10 +196,8 @@ public class Controller {
 
 	/**
 	 * 
-	 * @param connInfo
-	 *            登录信息
-	 * @param editSqlTab
-	 *            编辑语句tab
+	 * @param connInfo   登录信息
+	 * @param editSqlTab 编辑语句tab
 	 * @throws InterruptedException
 	 * @throws SQLException
 	 */
@@ -216,12 +210,12 @@ public class Controller {
 		if (str == null) {
 			str = "";
 		}
-		
+
 //		queryColumnsForSql(vo.getSql());(\\w+)?,?\\s*(\\w+)\\s*
-		
+
 		String userName = connInfo.getUserName();
 		String[] split3 = userName.split("#");
-		if (Dao.REDIS.equals(connInfo.getDataType())||Dao.REDISSENTINELPOOL.equals(connInfo.getDataType())) {
+		if (Dao.REDIS.equals(connInfo.getDataType()) || Dao.REDISSENTINELPOOL.equals(connInfo.getDataType())) {
 			String[] sqls = analyzer.converter(str);
 			for (int i = 0; i < sqls.length; i++) {
 				if (sqls[i].length() == 0) {
@@ -250,29 +244,15 @@ public class Controller {
 					if (sqls[i].length() == 0) {
 						continue;
 					}
-					if(split3.length>1) {
-						
-						String columsAliasRegEx1 =  "(from|into)([\\s*\\w*,)]*)(?:where|left|start|on|$|;)";
-						Pattern columsAliaspattern = Pattern.compile(columsAliasRegEx1,Pattern.CASE_INSENSITIVE);
+					if (split3.length > 1) {
+
+						String columsAliasRegEx1 = "(from|join)(,?(\\s*\\w*\\.)?(\\s*\\w*\\s*)(\\w*))(?:where|left|start|on|$|;)?";
+						Pattern columsAliaspattern = Pattern.compile(columsAliasRegEx1, Pattern.CASE_INSENSITIVE);
 						Matcher columsAliasmatcher = columsAliaspattern.matcher(str);
 						HashSet<String> tableName = new HashSet<>();
 						while (columsAliasmatcher.find()) {
-							String group = columsAliasmatcher.group(2);
-							String[] split = group.trim().split(",");
-							for (int j = 0; j < split.length; j++) {
-								String[] split2 = split[j].trim().split("\\s+");
-//								if(split2.length==2) {
-//								columsAliasMap.put(split2[1].trim().replaceAll("\\w*\\.", ""), split2[0].trim().replaceAll("\\w*\\.", ""));
-									tableName.add( split2[0].trim().replaceAll("\\w*\\.", ""));
-//								}else {
-//									tableName.add( split2[0].trim().replaceAll("\\w*\\.", ""));
-
-//								}
-							}
-						}
-						String[] array = tableName.toArray(new String[0]);
-						for (int j = 0; j < array.length; j++) {
-							sqls[i] = sqls[i].replaceAll(array[j], split3[1]+"."+array[j]);
+							String group = columsAliasmatcher.group(4);
+							sqls[i] = sqls[i].replaceAll(group.trim(), split3[1] + "." + group.trim());
 						}
 					}
 					System.out.println(sqls[i]);
@@ -401,8 +381,7 @@ public class Controller {
 
 	/**
 	 * 
-	 * @param node
-	 *            要删除的名字 如表名
+	 * @param node 要删除的名字 如表名
 	 * @param info
 	 * @throws InterruptedException
 	 * @throws SQLException
@@ -470,6 +449,4 @@ public class Controller {
 			return table;
 		}
 	}
-
-
 }
