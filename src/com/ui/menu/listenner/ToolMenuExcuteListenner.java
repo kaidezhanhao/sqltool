@@ -20,7 +20,8 @@ import com.view.sqloperate.QuerySqlTab;
 
 public class ToolMenuExcuteListenner extends MenuListenner{
 	
-	public void mousePressed(MouseEvent e) {
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		Thread th = new Thread(){
 			public void run() {
 		
