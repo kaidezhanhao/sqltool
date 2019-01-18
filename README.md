@@ -34,3 +34,4 @@
 ![image](https://github.com/448697783/sqltool/blob/master/METADATA/20190110182116.png?raw=true)
 5、直接点击X然后点击√可直接删除数据，没有主键的会让不选择一个列去删除
 6、直接编辑表格点击√可直接修改
+7、如有疑问可加群137579807
